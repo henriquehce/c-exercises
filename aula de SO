@@ -1,0 +1,41 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <pthread.h>
+
+int var = 0;
+
+void *leitura_teclado(void *param){
+    printf('Digite um numero inteiro; ');
+    scanf("%d", var);
+}
+
+
+void *soma(void *param){
+
+    var = var + 10;
+}
+
+void *imprimir(void *param){
+
+    printf("total: %d", var);
+}
+
+int main()
+{
+
+    pthread_t the, ths, thi;
+    pthread_attr_t attr;
+
+    pthread_attr_init(&attr);
+
+    pthread_create(&the, &attr, leitura_teclado, NULL);
+    pthread_create(&ths, &attr, leitura_teclado, NULL);
+    pthread_create(&thi, &attr, leitura_teclado, NULL);
+
+    pthread_join(the,NULL);
+    pthread_join(ths,NULL);
+    pthread_join(thi,NULL);
+
+    printf("soma &d");
+}
+
